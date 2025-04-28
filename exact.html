@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Algorithm 1 - Exact</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <h1>Algorithm 1 - Exact</h1>
+  </header>
+
+  <section class="intro-section">
+    <h2>Description</h2>
+    <p>This algorithm finds a Connected Dominating Set (CDS) in a graph G=(V,E) using support from an auxiliary graph Ψ=(VΨ,EΨ). It starts by setting two bounds, a lower bound l and an upper bound u, where u is the highest degree of any vertex with respect to Ψ. It also finds all (h−1) cliques in G, stored in a set Λ.</p>
+    <p>The algorithm then runs a binary search. In each step, it picks a midpoint α and builds a flow network with a source s, a sink t, the vertices of G, and the cliques in Λ. Edges are added with specific capacities based on degrees, clique structures, and the value of α. It then finds the minimum s-t cut in this network.</p>
+    <p>If the cut separates only the source node, it means the guess was too large, and the upper bound is reduced. Otherwise, the lower bound is raised, and the vertices on the source side (excluding s) form the current candidate for the CDS. This process repeats until the bounds converge, resulting in an exact connected dominating set.</p>
+  </section>
+
+  <section class="results">
+    <h2>Performance Table</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Dataset</th>
+          <th>H-Value</th>
+          <th>No. of (h-1) Cliques</th>
+          <th>No. of Triangles</th>
+          <th>No. of Edges in Densest Subgraph</th>
+          <th>No. of Vertices in Densest Subgraph</th>
+          <th>Runtime</th>
+          <th>Density</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>AS-733</td>
+          <td>3</td>
+          <td>3132</td>
+          <td>2503</td>
+          <td>226</td>
+          <td>28</td>
+          <td>61.3549s</td>
+          <td>8.071</td>
+        </tr>
+        <tr>
+          <td>CA-Hepth</td>
+          <td>3</td>
+          <td>25973</td>
+          <td>28339</td>
+          <td>496</td>
+          <td>32</td>
+          <td>619.24s</td>
+          <td>15.5</td>
+        </tr>
+        <tr>
+          <td>Yeast</td>
+          <td>3</td>
+          <td>1948</td>
+          <td>206</td>
+          <td>19</td>
+          <td>7</td>
+          <td>5.26113s</td>
+          <td>2.714</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</body>
+</html>

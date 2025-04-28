@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Algorithm 4 - CoreExact</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <h1>Algorithm 4 - CoreExact</h1>
+  </header>
+
+  <section class="intro-section">
+    <h2>Description</h2>
+    <p>This algorithm finds a Connected Dominating Set (CDS) by first performing a core decomposition of the graph G=(V,E) with help from an auxiliary graph Ψ=(VΨ,EΨ). It locates the (k′′,Ψ)-core by using pruning criteria to focus only on the denser parts of the graph. Then, it initializes empty sets for connected components C, the final solution D, and a temporary set U. It also sets two bounds, a lower bound l starting from the initial core density ρ’’, and an upper bound u based on the maximum degree in the graph.</p>
+    <p>The algorithm collects all connected components of the (k′′,Ψ)-core. For each component, if needed, it intersects it further with a smaller core. It then builds a flow network by following the edge-building rules from Algorithm 1 and finds a minimum s-t cut. If the cut is empty, it skips to the next component.</p>
+    <p>If the cut is meaningful, it uses binary search between l and u to fine-tune the solution. In each iteration, it builds a new flow network, finds the minimum cut, and updates l and u based on whether the cut separates only the source or a useful group of nodes. If a better connected structure is found, it updates the CDS candidate D. After all components are processed, the algorithm returns the final connected dominating set.</p>
+  </section>
+
+  <section class="results">
+    <h2>Performance Table</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Dataset</th>
+          <th>H-Value</th>
+          <th>No. of (h-1) Cliques</th>
+          <th>No. of Triangles</th>
+          <th>No. of Edges in Densest Subgraph</th>
+          <th>No. of Vertices in Densest Subgraph</th>
+          <th>Runtime</th>
+          <th>Density</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>AS-733</td>
+          <td>3</td>
+          <td>3132</td>
+          <td>2503</td>
+          <td>556</td>
+          <td>168</td>
+          <td>0.4194s</td>
+          <td>3.3095</td>
+        </tr>
+        <tr>
+          <td>CA-Hepth</td>
+          <td>3</td>
+          <td>25973</td>
+          <td>28339</td>
+          <td>22842</td>
+          <td>6882</td>
+          <td>2.475s</td>
+          <td>3.3191</td>
+        </tr>
+        <tr>
+          <td>Yeast</td>
+          <td>3</td>
+          <td>1948</td>
+          <td>206</td>
+          <td>406</td>
+          <td>236</td>
+          <td>0.07966s</td>
+          <td>1.7203</td>
+        </tr>
+        <tr>
+          <td>AS-caida</td>
+          <td>3</td>
+          <td>52861</td>
+          <td>34265</td>
+          <td>26549</td>
+          <td>8393</td>
+          <td>32.0799s</td>
+          <td>3.1632</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</body>
+</html>
